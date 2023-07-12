@@ -1,0 +1,40 @@
+<html>
+	
+	<head>
+	<script>
+		//WE HAVE TO SEND THE DATA IN THE JSON FORMAT
+		function add()
+		{
+			var album = {
+				name : document.getElementById("alb-name").value,
+				releaseDate : document.getElementById("alb-release").value,
+				copyright : document.getElementById("alb-copyright").value
+				
+			}
+			//alert(JSON.stringify(album)); --> Output shown in JSON FORMAT
+			
+			const xhttp = new XMLHttpRequest();
+			xhttp.onload = function()
+			{
+				alert(this.responseText);
+			}
+			xhttp.open("POST","http://localhost:8080/add-album", true);
+			xhttp.setRequestHeader('Content-type','application/json');
+			xhttp.send(JSON.stringify(album));
+			return false; 
+			
+		}
+		
+	</script>	
+	</head>
+	
+	<body>
+		<form onsubmit="return add()">
+			Enter Album Name:<input type="text" id="alb-name"/> <br> <br>
+			Enter Release Date: <input type="date" id="alb-release"/> <br><br>
+			Enter Copyright : <input type="text" id="alb-copyright"/> <br><br>
+			<button type="submit">Add Album</button>
+		</form>
+	</body>
+	
+</html>
